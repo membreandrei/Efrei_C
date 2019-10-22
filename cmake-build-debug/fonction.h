@@ -48,3 +48,5 @@ void listerActeurs();
 void quitter();
 
 int afficherMenu(int hint);
+
+char saisieTexte(void);

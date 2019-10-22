@@ -7,15 +7,14 @@ int main() {
     int etatMenu;
     etatMenu = afficherMenu(0);
     system("clear");
-    // TODO
-    /*
-     * Faire le code
-     */
+    //TODO
+    //Faire le code
+
     return 0;
 }
 
 int afficherMenu(int i) {
-    system ("/bin/stty raw >nul 2>nul");
+    system("/bin/stty raw >nul 2>nul");
     system("clear");
     printf("\n\n");
     printf("  Bienvenue dans le cinema PATHE !\n\n");
@@ -24,24 +23,35 @@ int afficherMenu(int i) {
             printf("  ->Liste des films\n");
             printf("    Liste des realisateurs\n");
             printf("    Rechercher un film\n");
+            printf("    Ajouter des données\n");
             printf("    Quitter\n\n");
             break;
         case 1:
             printf("    Liste des films\n");
             printf("  ->Liste des realisateurs\n");
             printf("    Rechercher un film\n");
+            printf("    Ajouter des données\n");
             printf("    Quitter\n\n");
             break;
         case 2:
             printf("    Liste des films\n");
             printf("    Liste des realisateurs\n");
             printf("  ->Rechercher un film\n");
+            printf("    Ajouter des données\n");
             printf("    Quitter\n\n");
             break;
         case 3:
             printf("    Liste des films\n");
             printf("    Liste des realisateurs\n");
             printf("    Rechercher un film\n");
+            printf("  ->Ajouter des données\n");
+            printf("    Quitter\n\n");
+            break;
+        case 4:
+            printf("    Liste des films\n");
+            printf("    Liste des realisateurs\n");
+            printf("    Rechercher un film\n");
+            printf("    Ajouter des données\n");
             printf("  ->Quitter\n\n");
             break;
         default:
@@ -54,7 +64,7 @@ int afficherMenu(int i) {
         if (key == 'z')
             switch (i) {
                 case 0:
-                    return afficherMenu(3);
+                    return afficherMenu(4);
                 default:
                     return afficherMenu(i - 1);
             }
@@ -65,10 +75,20 @@ int afficherMenu(int i) {
                 default:
                     return afficherMenu(i + 1);
             }
-        if (key == ENTER){
+        if (key == ENTER) {
             return i;
         }
 
     } while (key != 'z' || key != 's' || key != ENTER);
     return 0;
+}
+
+
+char saisieTexte(void) {
+    char saisie;
+    fflush(stdin);
+    printf("[Rechercher]: ");
+    scanf("%c", &saisie);
+    fflush(stdin);
+    return saisie;
 }
