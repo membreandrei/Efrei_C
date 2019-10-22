@@ -5,46 +5,7 @@
 
 int main() {
 
-    FILE *ptr;
-    Realisateur real;
-    real.cle = 0;
-    strcpy(real.dateNaissance, "01/02/1903");
-    strcpy(real.nationalite, "Tapasambal");
-    strcpy(real.nom, "Dider");
-    strcpy(real.prenom, "Chaussure");
-
-    Acteur act;
-    act.cle = 0;
-    strcpy(act.dateNaissance, "06/12/1353");
-    strcpy(act.nom, "Bush");
-    strcpy(act.prenom, "Georges");
-    strcpy(act.nationalite, "Irlandais");
-
-    Film movie;
-    movie.acteurs[0] = act;
-    strcpy(movie.nom, "Vendetta");
-    movie.anneeSortie = 1745;
-    movie.real = real;
-
-
-    ptr = fopen("films.txt", "w");
-    fwrite(&movie, sizeof(struct Film), 1, ptr);
-    fclose(ptr);
-
-
-
-    while(1){
-
-    }
-
-    int etatMenu;
-    etatMenu = afficherMenu(0);
     afficherMenu(0);
-    //system("clear");
-    //TODO
-
-
-    //choisirMenu(etatMenu);
     return 0;
 }
 
@@ -214,6 +175,35 @@ void lecture1(FILE* F) {
     fread(&b,sizeof(int),1,F);
     printf("a = %d ; d = %lf ; b = %d\n",a,d,b);
     fclose(F);
+}
+
+void creerRealisateur(){
+
+    FILE *ptr;
+    Realisateur real;
+    real.cle = 0;
+    strcpy(real.dateNaissance, "01/02/1903");
+    strcpy(real.nationalite, "Tapasambal");
+    strcpy(real.nom, "Dider");
+    strcpy(real.prenom, "Chaussure");
+
+    Acteur act;
+    act.cle = 0;
+    strcpy(act.dateNaissance, "06/12/1353");
+    strcpy(act.nom, "Bush");
+    strcpy(act.prenom, "Georges");
+    strcpy(act.nationalite, "Irlandais");
+
+    Film movie;
+    movie.acteurs[0] = act;
+    strcpy(movie.nom, "Vendetta");
+    movie.anneeSortie = 1745;
+    movie.real = real;
+
+
+    ptr = fopen("films.txt", "w");
+    fwrite(&movie, sizeof(struct Film), 1, ptr);
+    fclose(ptr);
 }
 
 int choixSousMenu(int i) {
