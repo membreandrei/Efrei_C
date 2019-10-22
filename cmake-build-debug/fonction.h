@@ -59,6 +59,6 @@ void creerActeur();
 
 void creerRealisateur();
 
-void
+void lecture1();
 
 char saisieTexte(void);

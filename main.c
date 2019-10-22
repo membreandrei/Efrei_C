@@ -144,7 +144,7 @@ int choixMenu(int i) {
             //listerFilms();
             break;
         case 1:
-            //listerRealisateurs();
+            listerRealisateurs();
             break;
         case 2:
             //rechercherFilm();
@@ -156,6 +156,27 @@ int choixMenu(int i) {
         default:
             break;
     }
+}
+
+void listerRealisateurs() {
+
+    system("clear");
+    printf("Liste de tous les realisateurs : \n");
+    FILE* F;
+    F = fopen("Realisateurs.bin","rb");
+}
+
+void lecture1(FILE* F) {
+    int a;
+    int b;
+    double d;
+    printf("-- lecture1\n");
+
+    fread(&a,sizeof(int),1,F);
+    fread(&d,sizeof(double),1,F);
+    fread(&b,sizeof(int),1,F);
+    printf("a = %d ; d = %lf ; b = %d\n",a,d,b);
+    fclose(F);
 }
 
 int choixSousMenu(int i) {
