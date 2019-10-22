@@ -1,15 +1,21 @@
 #include "cmake-build-debug/fonction.h"
 
-#define ENTER 10
+#define ENTER 13
 #define ESC 27
 
 int main() {
     int etatMenu;
     etatMenu = afficherMenu(0);
+    system("clear");
+    // TODO
+    /*
+     * Faire le code
+     */
     return 0;
 }
 
 int afficherMenu(int i) {
+    system ("/bin/stty raw >nul 2>nul");
     system("clear");
     printf("\n\n");
     printf("   Bienvenue dans le cinema PATHE !\n\n");
@@ -44,32 +50,24 @@ int afficherMenu(int i) {
     int key;
     do {
         key = getchar();
-        putchar(key);
         if (key == 'z')
             switch (i) {
                 case 0:
-                    afficherMenu(2);
-                    break;
+                    return afficherMenu(3);
                 default:
-                    afficherMenu(i - 1);
-                    break;
+                    return afficherMenu(i - 1);
             }
         if (key == 's')
             switch (i) {
-                case 2:
-                    afficherMenu(0);
-                    break;
+                case 3:
+                    return afficherMenu(0);
                 default:
-                    afficherMenu(i + 1);
-                    break;
+                    return afficherMenu(i + 1);
             }
-        if (key == ENTER)
-            switch (i) {
-                default:
-                    return i;
-                case 2:
-                    exit(0);
-            }
+        if (key == ENTER){
+            return i;
+        }
+
     } while (key != 'z' || key != 's' || key != ENTER);
-    return 2;
+    return 0;
 }
