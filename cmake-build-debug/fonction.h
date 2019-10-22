@@ -49,4 +49,16 @@ void quitter();
 
 int afficherMenu(int hint);
 
+int afficherSousMenu(int hint);
+
+int choixMenu(int i);
+
+int choixSousMenu(int i);
+
+void creerActeur();
+
+void creerRealisateur();
+
+void
+
 char saisieTexte(void);
