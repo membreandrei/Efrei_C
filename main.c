@@ -4,6 +4,7 @@
 #define ESC 27
 
 int main() {
+
     FILE *ptr;
     Realisateur real;
     real.cle = 0;
@@ -38,9 +39,9 @@ int main() {
 
     int etatMenu;
     etatMenu = afficherMenu(0);
+    afficherMenu(0);
     //system("clear");
     //TODO
-    //Faire le code
 
 
     //choisirMenu(etatMenu);
@@ -110,13 +111,107 @@ int afficherMenu(int i) {
                     return afficherMenu(i + 1);
             }
         if (key == ENTER) {
-            return i;
+            return choixMenu(i);
         }
 
     } while (key != 'z' || key != 's' || key != ENTER);
-    return 0;
 }
 
+int afficherSousMenu(int i) {
+        system("/bin/stty raw >nul 2>nul");
+        system("clear");
+        printf("\n\n");
+        printf("  Ajouter des données \n\n");
+        switch (i) {
+            case 0:
+                printf("  ->Ajouter un realisateur\n");
+                printf("    Ajouter un Acteur\n");
+                printf("    Ajouter un Film\n");
+                printf("    Retour\n\n");
+            break;
+            case 1:
+                printf("    Ajouter un realisateur\n");
+                printf("  ->Ajouter un Acteur\n");
+                printf("    Ajouter un Film\n");
+                printf("    Retour\n\n");
+            break;
+            case 2:
+                printf("    Ajouter un realisateur\n");
+                printf("    Ajouter un Acteur\n");
+                printf("  ->Ajouter un Film\n");
+                printf("    Retour\n\n");
+            break;
+            case 3:
+                printf("    Ajouter un realisateur\n");
+                printf("    Ajouter un Acteur\n");
+                printf("    Ajouter un Film\n");
+                printf("  ->Retour\n\n");
+                break;
+            default:
+                break;
+        }
+        printf("Utilisez Z et S pour naviguer. \n");
+        int key;
+        do {
+            key = getchar();
+            if (key == 'z')
+                switch (i) {
+                    case 0:
+                        return afficherSousMenu(3);
+                    default:
+                        return afficherSousMenu(i - 1);
+                }
+            if (key == 's')
+                switch (i) {
+                    case 3:
+                        return afficherSousMenu(0);
+                    default:
+                        return afficherSousMenu(i + 1);
+                }
+            if (key == ENTER) {
+                return choixSousMenu(i);
+            }
+
+        } while (key != 'z' || key != 's' || key != ENTER);
+}
+
+int choixMenu(int i) {
+    switch(i){
+        case 0:
+            //listerFilms();
+            break;
+        case 1:
+            //listerRealisateurs();
+            break;
+        case 2:
+            //rechercherFilm();
+            break;
+        case 3:
+            return afficherSousMenu(0);
+        case 4:
+            break;
+        default:
+            break;
+    }
+}
+
+int choixSousMenu(int i) {
+    switch(i){
+        case 0:
+            //listerFilms();
+            break;
+        case 1:
+            //listerRealisateurs();
+            break;
+        case 2:
+            //rechercherFilm();
+            break;
+        case 3:
+            return afficherMenu(0);
+        default:
+            break;
+    }
+}
 
 char saisieTexte(void) {
     char saisie;

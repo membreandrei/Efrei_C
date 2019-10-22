@@ -55,8 +55,18 @@ char saisieTexte(void);
 
 void rechercherFilm(char);
 
-int afficherMenuAjout(int);
-
 void choisirMenu(int);
 
 void retrieveDataFromFile(char, int);
+
+int afficherSousMenu(int hint);
+
+int choixMenu(int i);
+
+int choixSousMenu(int i);
+
+void creerActeur();
+
+void creerRealisateur();
+
+char saisieTexte(void);
