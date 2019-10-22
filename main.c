@@ -5,41 +5,7 @@
 
 int main() {
 
-    FILE *ptr;
-    Realisateur real;
-    real.cle = 0;
-    strcpy(real.dateNaissance, "01/02/1903");
-    strcpy(real.nationalite, "Tapasambal");
-    strcpy(real.nom, "Dider");
-    strcpy(real.prenom, "Chaussure");
-
-    Acteur act;
-    act.cle = 0;
-    strcpy(act.dateNaissance, "06/12/1353");
-    strcpy(act.nom, "Bush");
-    strcpy(act.prenom, "Georges");
-    strcpy(act.nationalite, "Irlandais");
-
-    Film movie;
-    movie.acteurs[0] = act;
-    strcpy(movie.nom, "Vendetta");
-    movie.anneeSortie = 1745;
-    movie.real = real;
-
-
-    ptr = fopen("films.txt", "ab");
-    fwrite(&movie, sizeof(struct Film), 1, ptr);
-    fclose(ptr);
-
-
-    int etatMenu;
-    etatMenu = afficherMenu(0);
     afficherMenu(0);
-    //system("clear");
-    //TODO
-
-
-    //choisirMenu(etatMenu);
     return 0;
 }
 
@@ -113,70 +79,70 @@ int afficherMenu(int i) {
 }
 
 int afficherSousMenu(int i) {
-    system("/bin/stty raw >nul 2>nul");
-    system("clear");
-    printf("\n\n");
-    printf("  Ajouter des données \n\n");
-    switch (i) {
-        case 0:
-            printf("  ->Ajouter un realisateur\n");
-            printf("    Ajouter un Acteur\n");
-            printf("    Ajouter un Film\n");
-            printf("    Retour\n\n");
+        system("/bin/stty raw >nul 2>nul");
+        system("clear");
+        printf("\n\n");
+        printf("  Ajouter des données \n\n");
+        switch (i) {
+            case 0:
+                printf("  ->Ajouter un realisateur\n");
+                printf("    Ajouter un Acteur\n");
+                printf("    Ajouter un Film\n");
+                printf("    Retour\n\n");
             break;
-        case 1:
-            printf("    Ajouter un realisateur\n");
-            printf("  ->Ajouter un Acteur\n");
-            printf("    Ajouter un Film\n");
-            printf("    Retour\n\n");
+            case 1:
+                printf("    Ajouter un realisateur\n");
+                printf("  ->Ajouter un Acteur\n");
+                printf("    Ajouter un Film\n");
+                printf("    Retour\n\n");
             break;
-        case 2:
-            printf("    Ajouter un realisateur\n");
-            printf("    Ajouter un Acteur\n");
-            printf("  ->Ajouter un Film\n");
-            printf("    Retour\n\n");
+            case 2:
+                printf("    Ajouter un realisateur\n");
+                printf("    Ajouter un Acteur\n");
+                printf("  ->Ajouter un Film\n");
+                printf("    Retour\n\n");
             break;
-        case 3:
-            printf("    Ajouter un realisateur\n");
-            printf("    Ajouter un Acteur\n");
-            printf("    Ajouter un Film\n");
-            printf("  ->Retour\n\n");
-            break;
-        default:
-            break;
-    }
-    printf("Utilisez Z et S pour naviguer. \n");
-    int key;
-    do {
-        key = getchar();
-        if (key == 'z')
-            switch (i) {
-                case 0:
-                    return afficherSousMenu(3);
-                default:
-                    return afficherSousMenu(i - 1);
-            }
-        if (key == 's')
-            switch (i) {
-                case 3:
-                    return afficherSousMenu(0);
-                default:
-                    return afficherSousMenu(i + 1);
-            }
-        if (key == ENTER) {
-            return choixSousMenu(i);
+            case 3:
+                printf("    Ajouter un realisateur\n");
+                printf("    Ajouter un Acteur\n");
+                printf("    Ajouter un Film\n");
+                printf("  ->Retour\n\n");
+                break;
+            default:
+                break;
         }
+        printf("Utilisez Z et S pour naviguer. \n");
+        int key;
+        do {
+            key = getchar();
+            if (key == 'z')
+                switch (i) {
+                    case 0:
+                        return afficherSousMenu(3);
+                    default:
+                        return afficherSousMenu(i - 1);
+                }
+            if (key == 's')
+                switch (i) {
+                    case 3:
+                        return afficherSousMenu(0);
+                    default:
+                        return afficherSousMenu(i + 1);
+                }
+            if (key == ENTER) {
+                return choixSousMenu(i);
+            }
 
-    } while (key != 'z' || key != 's' || key != ENTER);
+        } while (key != 'z' || key != 's' || key != ENTER);
 }
 
 int choixMenu(int i) {
-    switch (i) {
+    switch(i){
         case 0:
             //listerFilms();
             break;
         case 1:
-            //listerRealisateurs();
+            listerRealisateurs();
             break;
         case 2:
             //rechercherFilm();
@@ -190,8 +156,58 @@ int choixMenu(int i) {
     }
 }
 
+void listerRealisateurs() {
+
+    system("clear");
+    printf("Liste de tous les realisateurs : \n");
+    FILE* F;
+    F = fopen("Realisateurs.bin","rb");
+}
+
+void lecture1(FILE* F) {
+    int a;
+    int b;
+    double d;
+    printf("-- lecture1\n");
+
+    fread(&a,sizeof(int),1,F);
+    fread(&d,sizeof(double),1,F);
+    fread(&b,sizeof(int),1,F);
+    printf("a = %d ; d = %lf ; b = %d\n",a,d,b);
+    fclose(F);
+}
+
+void creerRealisateur(){
+
+    FILE *ptr;
+    Realisateur real;
+    real.cle = 0;
+    strcpy(real.dateNaissance, "01/02/1903");
+    strcpy(real.nationalite, "Tapasambal");
+    strcpy(real.nom, "Dider");
+    strcpy(real.prenom, "Chaussure");
+
+    Acteur act;
+    act.cle = 0;
+    strcpy(act.dateNaissance, "06/12/1353");
+    strcpy(act.nom, "Bush");
+    strcpy(act.prenom, "Georges");
+    strcpy(act.nationalite, "Irlandais");
+
+    Film movie;
+    movie.acteurs[0] = act;
+    strcpy(movie.nom, "Vendetta");
+    movie.anneeSortie = 1745;
+    movie.real = real;
+
+
+    ptr = fopen("films.txt", "w");
+    fwrite(&movie, sizeof(struct Film), 1, ptr);
+    fclose(ptr);
+}
+
 int choixSousMenu(int i) {
-    switch (i) {
+    switch(i){
         case 0:
             //listerFilms();
             break;
@@ -223,14 +239,14 @@ void rechercheFilm(char nom) {
 
 }
 
-void saveStruct(void *structure, char fileName) {
+void saveStruct(void *structure, char fileName){
     FILE *fptr;
     fptr = fopen(fileName, "ab");
     fwrite(&structure, sizeof(structure), 1, fptr);
     fclose(fptr);
 }
 
-void retrieveDataFromFile(char fileName, int type) {
+void retrieveDataFromFile(char fileName, int type){
     FILE *fptr;
     fptr = fopen(&fileName, "r");
 
@@ -238,7 +254,7 @@ void retrieveDataFromFile(char fileName, int type) {
     Realisateur *real;
     Film *movie;
 
-    switch (type) {
+    switch(type){
         case 0:
             fread(act, sizeof(Acteur), 1, fptr);
         case 1:

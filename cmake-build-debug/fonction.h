@@ -39,6 +39,14 @@ void afficherActeur(Acteur act);
 
 Film getFilm(char *nom);
 
+char saisieTexte(void);
+
+void rechercherFilm(char);
+
+void choisirMenu(int);
+
+void retrieveDataFromFile(char, int);
+
 void afficherFilm(Film film);
 
 void listerFilms();
@@ -50,14 +58,6 @@ void listerActeurs();
 void quitter();
 
 int afficherMenu(int hint);
-
-char saisieTexte(void);
-
-void rechercherFilm(char);
-
-void choisirMenu(int);
-
-void retrieveDataFromFile(char, int);
 
 int afficherSousMenu(int hint);
 
