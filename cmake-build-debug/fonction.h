@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 
 int COMPTEURREALISATEUR = 0;
 int COMPTEURACTEUR = 0;
@@ -49,6 +51,14 @@ void quitter();
 
 int afficherMenu(int hint);
 
+char saisieTexte(void);
+
+void rechercherFilm(char);
+
+void choisirMenu(int);
+
+void retrieveDataFromFile(char, int);
+
 int afficherSousMenu(int hint);
 
 int choixMenu(int i);
@@ -58,7 +68,5 @@ int choixSousMenu(int i);
 void creerActeur();
 
 void creerRealisateur();
-
-void
 
 char saisieTexte(void);
