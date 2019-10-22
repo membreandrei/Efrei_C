@@ -18,7 +18,7 @@ int afficherMenu(int i) {
     system ("/bin/stty raw >nul 2>nul");
     system("clear");
     printf("\n\n");
-    printf("   Bienvenue dans le cinema PATHE !\n\n");
+    printf("  Bienvenue dans le cinema PATHE !\n\n");
     switch (i) {
         case 0:
             printf("  ->Liste des films\n");
@@ -47,6 +47,7 @@ int afficherMenu(int i) {
         default:
             break;
     }
+    printf("Utilisez Z et S pour naviguer. \n");
     int key;
     do {
         key = getchar();
