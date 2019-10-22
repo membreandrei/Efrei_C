@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/cygdrive/c/Users/avoicu/CLionProjects/TP4/cmake-build-debug/fonction.h
+stdio.h
+-
+stdlib.h
+-
+
+/cygdrive/c/Users/avoicu/CLionProjects/TP4/main.c
+cmake-build-debug/fonction.h
+/cygdrive/c/Users/avoicu/CLionProjects/TP4/cmake-build-debug/fonction.h
+
