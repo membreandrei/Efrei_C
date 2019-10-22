@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 
 int COMPTEURREALISATEUR = 0;
 int COMPTEURACTEUR = 0;
@@ -50,3 +52,11 @@ void quitter();
 int afficherMenu(int hint);
 
 char saisieTexte(void);
+
+void rechercherFilm(char);
+
+int afficherMenuAjout(int);
+
+void choisirMenu(int);
+
+void retrieveDataFromFile(char, int);
