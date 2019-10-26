@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/TP4.dir/main.c.o"
-  "TP4.pdb"
   "TP4.exe"
+  "TP4.pdb"
   "libTP4.dll.a"
 )
 

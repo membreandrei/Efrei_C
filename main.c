@@ -162,6 +162,7 @@ void listerRealisateurs() {
     printf("Liste de tous les realisateurs : \n");
     FILE* F;
     F = fopen("Realisateurs.bin","rb");
+    
 }
 
 void lecture1(FILE* F) {
