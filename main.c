@@ -79,61 +79,61 @@ int afficherMenu(int i) {
 }
 
 int afficherSousMenu(int i) {
-        system("/bin/stty raw >nul 2>nul");
-        system("clear");
-        printf("\n\n");
-        printf("  Ajouter des données \n\n");
-        switch (i) {
-            case 0:
-                printf("  ->Ajouter un realisateur\n");
-                printf("    Ajouter un Acteur\n");
-                printf("    Ajouter un Film\n");
-                printf("    Retour\n\n");
+    system("/bin/stty raw >nul 2>nul");
+    system("clear");
+    printf("\n\n");
+    printf("  Ajouter des données \n\n");
+    switch (i) {
+        case 0:
+            printf("  ->Ajouter un realisateur\n");
+            printf("    Ajouter un Acteur\n");
+            printf("    Ajouter un Film\n");
+            printf("    Retour\n\n");
+        break;
+        case 1:
+            printf("    Ajouter un realisateur\n");
+            printf("  ->Ajouter un Acteur\n");
+            printf("    Ajouter un Film\n");
+            printf("    Retour\n\n");
+        break;
+        case 2:
+            printf("    Ajouter un realisateur\n");
+            printf("    Ajouter un Acteur\n");
+            printf("  ->Ajouter un Film\n");
+            printf("    Retour\n\n");
+        break;
+        case 3:
+            printf("    Ajouter un realisateur\n");
+            printf("    Ajouter un Acteur\n");
+            printf("    Ajouter un Film\n");
+            printf("  ->Retour\n\n");
             break;
-            case 1:
-                printf("    Ajouter un realisateur\n");
-                printf("  ->Ajouter un Acteur\n");
-                printf("    Ajouter un Film\n");
-                printf("    Retour\n\n");
+        default:
             break;
-            case 2:
-                printf("    Ajouter un realisateur\n");
-                printf("    Ajouter un Acteur\n");
-                printf("  ->Ajouter un Film\n");
-                printf("    Retour\n\n");
-            break;
-            case 3:
-                printf("    Ajouter un realisateur\n");
-                printf("    Ajouter un Acteur\n");
-                printf("    Ajouter un Film\n");
-                printf("  ->Retour\n\n");
-                break;
-            default:
-                break;
-        }
-        printf("Utilisez Z et S pour naviguer. \n");
-        int key;
-        do {
-            key = getchar();
-            if (key == 'z')
-                switch (i) {
-                    case 0:
-                        return afficherSousMenu(3);
-                    default:
-                        return afficherSousMenu(i - 1);
-                }
-            if (key == 's')
-                switch (i) {
-                    case 3:
-                        return afficherSousMenu(0);
-                    default:
-                        return afficherSousMenu(i + 1);
-                }
-            if (key == ENTER) {
-                return choixSousMenu(i);
+    }
+    printf("Utilisez Z et S pour naviguer. \n");
+    int key;
+    do {
+        key = getchar();
+        if (key == 'z')
+            switch (i) {
+                case 0:
+                    return afficherSousMenu(3);
+                default:
+                    return afficherSousMenu(i - 1);
             }
+        if (key == 's')
+            switch (i) {
+                case 3:
+                    return afficherSousMenu(0);
+                default:
+                    return afficherSousMenu(i + 1);
+            }
+        if (key == ENTER) {
+            return choixSousMenu(i);
+        }
 
-        } while (key != 'z' || key != 's' || key != ENTER);
+    } while (key != 'z' || key != 's' || key != ENTER);
 }
 
 int choixMenu(int i) {
@@ -157,63 +157,119 @@ int choixMenu(int i) {
 }
 
 void listerRealisateurs() {
-
+    Realisateur real;
+    int i = 1;
     system("clear");
-    printf("Liste de tous les realisateurs : \n");
+    printf("Liste de tous les realisateurs : \n\n\n");
     FILE* F;
     F = fopen("Realisateurs.bin","rb");
-    
-}
+    while(1){
+        fread(&real,sizeof(struct Realisateur), 1, F);
+        if(feof(F)) {
+            break;
+        }
+        printf("Realisateur n %d : \n\n", i);
+        printf("nom = %s\n",real.nom);
+        printf("Prenom = %s\n",real.prenom);
+        printf("Nationalite = %s\n",real.nationalite);
+        printf("Date de naissance = %s\n\n\n",real.dateNaissance);
+        i++;
 
-void lecture1(FILE* F) {
-    int a;
-    int b;
-    double d;
-    printf("-- lecture1\n");
-
-    fread(&a,sizeof(int),1,F);
-    fread(&d,sizeof(double),1,F);
-    fread(&b,sizeof(int),1,F);
-    printf("a = %d ; d = %lf ; b = %d\n",a,d,b);
+    }
     fclose(F);
+    int key;
+    while (key != ENTER){
+        printf("Appuyez sur Entrer pour quitter\n\n");
+        key = getchar();
+    }
+
+    afficherMenu(0);
 }
 
-void creerRealisateur(){
+void creerActeur(){
 
-    FILE *ptr;
-    Realisateur real;
-    real.cle = 0;
-    strcpy(real.dateNaissance, "01/02/1903");
-    strcpy(real.nationalite, "Tapasambal");
-    strcpy(real.nom, "Dider");
-    strcpy(real.prenom, "Chaussure");
-
+    FILE* F;
     Acteur act;
+    char nom[50];
+    char prenom[50];
+    char nationalite[50];
+    char dateNaissance[50];
+    system("clear");
+    printf("\nCreation d'un realisateur : \n\n");
+    printf("Nom : ");
+    scanf(" %s", &nom);
+    printf("\nPrenom : ");
+    scanf(" %s", &prenom);
+    printf("\nNationalite : ");
+    scanf(" %s", &nationalite);
+    printf("\nDate de naissance (jj/mm/aaaa) : ");
+    scanf(" %s", &dateNaissance);
     act.cle = 0;
-    strcpy(act.dateNaissance, "06/12/1353");
-    strcpy(act.nom, "Bush");
-    strcpy(act.prenom, "Georges");
-    strcpy(act.nationalite, "Irlandais");
+    strcpy(act.dateNaissance, dateNaissance);
+    strcpy(act.nationalite, nationalite);
+    strcpy(act.nom, nom);
+    strcpy(act.prenom, prenom);
 
+    F = fopen("Acteurs.bin", "ab");
+    fwrite(&act, sizeof(struct Realisateur), 1, F);
+    fclose(F);
+
+    viderBuffer();
+
+    afficherSousMenu(0);
+
+}
+
+/*
+void creerFilm(){
     Film movie;
     movie.acteurs[0] = act;
     strcpy(movie.nom, "Vendetta");
     movie.anneeSortie = 1745;
     movie.real = real;
+}
+*/
+void creerRealisateur(){
 
+    FILE* F;
+    Realisateur real;
+    char nom[50];
+    char prenom[50];
+    char nationalite[50];
+    char dateNaissance[50];
+    system("clear");
+    printf("\nCreation d'un realisateur : \n\n");
+    printf("Nom : ");
+    scanf(" %s", &nom);
+    printf("\nPrenom : ");
+    scanf(" %s", &prenom);
+    printf("\nNationalite : ");
+    scanf(" %s", &nationalite);
+    printf("\nDate de naissance (jj/mm/aaaa) : ");
+    scanf(" %s", &dateNaissance);
+    real.cle = 0;
+    strcpy(real.dateNaissance, dateNaissance);
+    strcpy(real.nationalite, nationalite);
+    strcpy(real.nom, nom);
+    strcpy(real.prenom, prenom);
 
-    ptr = fopen("films.txt", "w");
-    fwrite(&movie, sizeof(struct Film), 1, ptr);
-    fclose(ptr);
+    F = fopen("realisateurs.bin", "ab");
+    fwrite(&real, sizeof(struct Realisateur), 1, F);
+    fclose(F);
+
+    viderBuffer();
+
+    afficherSousMenu(0);
+
 }
 
 int choixSousMenu(int i) {
     switch(i){
         case 0:
-            //listerFilms();
+            creerRealisateur();
             break;
         case 1:
-            //listerRealisateurs();
+            creerActeur();
             break;
         case 2:
             //rechercherFilm();
@@ -277,6 +333,15 @@ void rechercherFilm(char ouestcharlie)
         {
             afficherFilm(movies[i]);
         }
+    }
+}
+
+void viderBuffer()
+{
+    int c = 0;
+    while (c != ENTER && c != EOF)
+    {
+        c = getchar();
     }
 }
 

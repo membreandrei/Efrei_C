@@ -69,4 +69,8 @@ void creerActeur();
 
 void creerRealisateur();
 
+void creerFilm();
+
+void viderBuffer();
+
 char saisieTexte(void);
