@@ -11,6 +11,10 @@ stdio.h
 -
 stdlib.h
 -
+string.h
+-
+unistd.h
+-
 
 /cygdrive/c/Users/avoicu/CLionProjects/TP4/main.c
 cmake-build-debug/fonction.h

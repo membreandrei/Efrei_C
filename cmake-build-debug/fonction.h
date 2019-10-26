@@ -69,4 +69,10 @@ void creerActeur();
 
 void creerRealisateur();
 
+void creerFilm();
+
+void ecriture(FILE* F);
+
+void lecture(FILE* F);
+
 char saisieTexte(void);

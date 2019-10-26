@@ -157,35 +157,33 @@ int choixMenu(int i) {
 }
 
 void listerRealisateurs() {
+    Realisateur* real;
 
+    real = (Realisateur) malloc(sizeof(Realisateur));
     system("clear");
     printf("Liste de tous les realisateurs : \n");
     FILE* F;
     F = fopen("Realisateurs.bin","rb");
-}
-
-void lecture1(FILE* F) {
-    int a;
-    int b;
-    double d;
     printf("-- lecture1\n");
-
-    fread(&a,sizeof(int),1,F);
-    fread(&d,sizeof(double),1,F);
-    fread(&b,sizeof(int),1,F);
-    printf("a = %d ; d = %lf ; b = %d\n",a,d,b);
+    while()
+    fread(&real,sizeof(struct Realisateur), 1, F);
+    printf("nom = %s\n",real.nom);
     fclose(F);
+    while (1){
+
+    }
 }
 
-void creerRealisateur(){
+/*
+void lecture(FILE* F) {
 
-    FILE *ptr;
-    Realisateur real;
-    real.cle = 0;
-    strcpy(real.dateNaissance, "01/02/1903");
-    strcpy(real.nationalite, "Tapasambal");
-    strcpy(real.nom, "Dider");
-    strcpy(real.prenom, "Chaussure");
+}
+void ecriture(FILE* F){
+
+
+}
+
+void creerActeur(){
 
     Acteur act;
     act.cle = 0;
@@ -193,23 +191,49 @@ void creerRealisateur(){
     strcpy(act.nom, "Bush");
     strcpy(act.prenom, "Georges");
     strcpy(act.nationalite, "Irlandais");
+}
 
+void creerFilm(){
     Film movie;
     movie.acteurs[0] = act;
     strcpy(movie.nom, "Vendetta");
     movie.anneeSortie = 1745;
     movie.real = real;
+}
+*/
+void creerRealisateur(){
 
+    FILE* F;
+    Realisateur real;
+    char nom[50];
+    char prenom[50];
+    char nationalite[50];
+    char dateNaissance[50];
+    system("clear");
+    printf("\nCreation d'un realisateur : \n");
+    printf("Nom : ");
+    scanf(" %s", &nom);
+    printf("\nPrenom : ");
+    scanf(" %s", &prenom);
+    printf("\nNationalite : ");
+    scanf(" %s", &nationalite);
+    printf("\nDate de naissance (jj/mm/aaaa) : ");
+    scanf(" %s", &dateNaissance);
+    real.cle = 0;
+    strcpy(real.dateNaissance, dateNaissance);
+    strcpy(real.nationalite, nationalite);
+    strcpy(real.nom, nom);
+    strcpy(real.prenom, prenom);
 
-    ptr = fopen("films.txt", "w");
-    fwrite(&movie, sizeof(struct Film), 1, ptr);
-    fclose(ptr);
+    F = fopen("realisateurs.bin", "wb");
+    fwrite(&real, sizeof(struct Realisateur), 1, F);
+    fclose(F);
 }
 
 int choixSousMenu(int i) {
     switch(i){
         case 0:
-            //listerFilms();
+            creerRealisateur();
             break;
         case 1:
             //listerRealisateurs();
