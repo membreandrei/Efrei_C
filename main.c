@@ -257,7 +257,7 @@ char saisieTexte(void) {
     return saisie;
 }
 
-void rechercheFilm(char nom){
+void rechercheFilm(char nom) {
     FILE *fptr;
     //fptr = fopen('data/films.bin', 'rb');
 
@@ -286,5 +286,24 @@ void retrieveDataFromFile(char fileName, int type){
         case 2:
             fread(movie, sizeof(Film), 1, fptr);
     }
-    //printf ("Nom = %s name = %s %s\n", lefilm.nom, lefilm.acteurs[0].nom, lefilm.real.nom);
+    //printf ("Nom = %s name = %s %s\n", lefilm.nom, lefilm.acteurs[0].nom, lefilm.real.nom)
+}
+
+void rechercherFilm(char ouestcharlie)
+{
+    Film movies[30];
+    for (int i = 0; i < 30; i++)
+    {
+        char str = movies[i].nom;
+        char *ptr = strstr(str, ouestcharlie);
+        if (ptr != NULL)
+        {
+            afficherFilm(movies[i]);
+        }
+    }
+}
+
+void afficherFilm(Film the_movie)
+{
+
 }
