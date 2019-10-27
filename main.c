@@ -16,15 +16,17 @@ int afficherMenu(int i) {
     printf("  Bienvenue dans le cinema PATHE !\n\n");
     switch (i) {
         case 0:
-            printf("  ->Liste des films\n");
+            printf("   ->Liste des films\n");
             printf("    Liste des realisateurs\n");
+            printf("    Liste des Acteurs\n");
             printf("    Rechercher un film\n");
             printf("    Ajouter des données\n");
             printf("    Quitter\n\n");
             break;
         case 1:
             printf("    Liste des films\n");
-            printf("  ->Liste des realisateurs\n");
+            printf("   ->Liste des realisateurs\n");
+            printf("    Liste des Acteurs\n");
             printf("    Rechercher un film\n");
             printf("    Ajouter des données\n");
             printf("    Quitter\n\n");
@@ -32,23 +34,34 @@ int afficherMenu(int i) {
         case 2:
             printf("    Liste des films\n");
             printf("    Liste des realisateurs\n");
-            printf("  ->Rechercher un film\n");
+            printf("   ->Liste des Acteurs\n");
+            printf("    Rechercher un film\n");
             printf("    Ajouter des données\n");
             printf("    Quitter\n\n");
             break;
         case 3:
             printf("    Liste des films\n");
             printf("    Liste des realisateurs\n");
-            printf("    Rechercher un film\n");
-            printf("  ->Ajouter des données\n");
+            printf("    Liste des Acteurs\n");
+            printf("   ->Rechercher un film\n");
+            printf("    Ajouter des données\n");
             printf("    Quitter\n\n");
             break;
         case 4:
             printf("    Liste des films\n");
             printf("    Liste des realisateurs\n");
+            printf("    Liste des Acteurs\n");
+            printf("    Rechercher un film\n");
+            printf("   ->Ajouter des données\n");
+            printf("    Quitter\n\n");
+            break;
+        case 5:
+            printf("    Liste des films\n");
+            printf("    Liste des realisateurs\n");
+            printf("    Liste des Acteurs\n");
             printf("    Rechercher un film\n");
             printf("    Ajouter des données\n");
-            printf("  ->Quitter\n\n");
+            printf("   ->Quitter\n\n");
             break;
         default:
             break;
@@ -60,13 +73,13 @@ int afficherMenu(int i) {
         if (key == 'z')
             switch (i) {
                 case 0:
-                    return afficherMenu(4);
+                    return afficherMenu(5);
                 default:
                     return afficherMenu(i - 1);
             }
         if (key == 's')
             switch (i) {
-                case 4:
+                case 5:
                     return afficherMenu(0);
                 default:
                     return afficherMenu(i + 1);
@@ -85,28 +98,28 @@ int afficherSousMenu(int i) {
     printf("  Ajouter des données \n\n");
     switch (i) {
         case 0:
-            printf("  ->Ajouter un realisateur\n");
+            printf("   ->Ajouter un realisateur\n");
             printf("    Ajouter un Acteur\n");
             printf("    Ajouter un Film\n");
             printf("    Retour\n\n");
             break;
         case 1:
             printf("    Ajouter un realisateur\n");
-            printf("  ->Ajouter un Acteur\n");
+            printf("   ->Ajouter un Acteur\n");
             printf("    Ajouter un Film\n");
             printf("    Retour\n\n");
             break;
         case 2:
             printf("    Ajouter un realisateur\n");
             printf("    Ajouter un Acteur\n");
-            printf("  ->Ajouter un Film\n");
+            printf("   ->Ajouter un Film\n");
             printf("    Retour\n\n");
             break;
         case 3:
             printf("    Ajouter un realisateur\n");
             printf("    Ajouter un Acteur\n");
             printf("    Ajouter un Film\n");
-            printf("  ->Retour\n\n");
+            printf("   ->Retour\n\n");
             break;
         default:
             break;
@@ -147,14 +160,17 @@ int choixMenu(int i) {
             afficherMenu(0);
             break;
         case 2:
-            rechercheFilm();
+            listerActeur();
             afficherMenu(0);
             break;
         case 3:
-            return afficherSousMenu(0);
-        case 4:
-            exit(0);
+            rechercheFilm();
+            afficherMenu(0);
             break;
+        case 4:
+            return afficherSousMenu(0);
+        case 5:
+            exit(0);
         default:
             break;
     }
@@ -444,15 +460,6 @@ int choixSousMenu(int i) {
     }
 }
 
-char saisieTexte(void) {
-    char saisie;
-    fflush(stdin);
-    printf("[Rechercher]: ");
-    scanf("%c", &saisie);
-    fflush(stdin);
-    return saisie;
-}
-
 void rechercheFilm() {
     Film movie[50];
     int k = 0;
@@ -482,43 +489,6 @@ void rechercheFilm() {
     while (key != ENTER) {
         printf("Appuyez sur Entrer pour quitter\n\n");
         key = getchar();
-    }
-}
-
-void saveStruct(void *structure, char fileName) {
-    FILE *fptr;
-    fptr = fopen(fileName, "ab");
-    fwrite(&structure, sizeof(structure), 1, fptr);
-    fclose(fptr);
-}
-
-void retrieveDataFromFile(char fileName, int type) {
-    FILE *fptr;
-    fptr = fopen(&fileName, "r");
-
-    Acteur *act;
-    Realisateur *real;
-    Film *movie;
-
-    switch (type) {
-        case 0:
-            fread(act, sizeof(Acteur), 1, fptr);
-        case 1:
-            fread(real, sizeof(Realisateur), 1, fptr);
-        case 2:
-            fread(movie, sizeof(Film), 1, fptr);
-    }
-    //printf ("Nom = %s name = %s %s\n", lefilm.nom, lefilm.acteurs[0].nom, lefilm.real.nom)
-}
-
-void rechercherFilm(char ouestcharlie) {
-    Film movies[30];
-    for (int i = 0; i < 30; i++) {
-        char str = movies[i].nom;
-        char *ptr = strstr(str, ouestcharlie);
-        if (ptr != NULL) {
-            afficherFilm(movies[i]);
-        }
     }
 }
 
