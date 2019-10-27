@@ -205,7 +205,11 @@ void listerFilms() {
         printf("Nom = %s\n",movie.nom);
         printf("Annee de Sortie = %s\n",movie.anneeSortie);
         printf("Realisateur = {Nom = %s , Prenom = %s}\n",movie.real.nom, movie.real.prenom);
+
         for (j = 0; j < sizeof(movie.acteurs); j++) {
+            if(*movie.acteurs[j].nom == '\0'){
+                break;
+            }
             printf("Acteurs = {Nom = %s , Prenom = %s}\n", movie.acteurs[j].nom, movie.acteurs[j].prenom);
         }
         printf("\n\n");
@@ -333,6 +337,7 @@ Acteur* chercheActeur(int nbActeur){
 
     }
     fclose(F);
+    free(actFile);
     return act;
 }
 
@@ -365,7 +370,7 @@ void creerFilm(){
 
     viderBuffer();
 
-    printf("Tapez combien d'Acteur a votre film: \n");
+    printf("Tapez combien d'Acteurs a votre film: \n");
     scanf(" %d", &nb);
 
     listerActeur();
