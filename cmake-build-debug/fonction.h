@@ -24,9 +24,9 @@ typedef struct Acteur {
 
 typedef struct Film {
     char nom[100];
-    int anneeSortie;
+    char anneeSortie[100];
     Realisateur real;
-    Acteur acteurs[3];
+    Acteur* acteurs;
 } Film;
 
 Realisateur getRealisateur(char *nom);
@@ -72,5 +72,11 @@ void creerRealisateur();
 void creerFilm();
 
 void viderBuffer();
+
+void listerActeur();
+
+Acteur* chercheActeur(int nbActeur);
+
+Realisateur chercheReal(int choix);
 
 char saisieTexte(void);
