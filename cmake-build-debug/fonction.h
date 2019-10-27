@@ -26,7 +26,7 @@ typedef struct Film {
     char nom[100];
     char anneeSortie[100];
     Realisateur real;
-    Acteur* acteurs;
+    Acteur acteurs[50];
 } Film;
 
 Realisateur getRealisateur(char *nom);
@@ -41,7 +41,7 @@ Film getFilm(char *nom);
 
 char saisieTexte(void);
 
-void rechercherFilm(char);
+void rechercheFilm();
 
 void choisirMenu(int);
 

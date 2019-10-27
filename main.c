@@ -89,19 +89,19 @@ int afficherSousMenu(int i) {
             printf("    Ajouter un Acteur\n");
             printf("    Ajouter un Film\n");
             printf("    Retour\n\n");
-        break;
+            break;
         case 1:
             printf("    Ajouter un realisateur\n");
             printf("  ->Ajouter un Acteur\n");
             printf("    Ajouter un Film\n");
             printf("    Retour\n\n");
-        break;
+            break;
         case 2:
             printf("    Ajouter un realisateur\n");
             printf("    Ajouter un Acteur\n");
             printf("  ->Ajouter un Film\n");
             printf("    Retour\n\n");
-        break;
+            break;
         case 3:
             printf("    Ajouter un realisateur\n");
             printf("    Ajouter un Acteur\n");
@@ -137,7 +137,7 @@ int afficherSousMenu(int i) {
 }
 
 int choixMenu(int i) {
-    switch(i){
+    switch (i) {
         case 0:
             listerFilms();
             afficherMenu(0);
@@ -147,12 +147,13 @@ int choixMenu(int i) {
             afficherMenu(0);
             break;
         case 2:
-            //rechercherFilm();
+            rechercheFilm();
             afficherMenu(0);
             break;
         case 3:
             return afficherSousMenu(0);
         case 4:
+            exit(0);
             break;
         default:
             break;
@@ -164,24 +165,24 @@ void listerRealisateurs() {
     int i = 1;
     system("clear");
     printf("Liste de tous les realisateurs : \n\n\n");
-    FILE* F;
-    F = fopen("Realisateurs.bin","rb");
-    while(1){
-        fread(&real,sizeof(struct Realisateur), 1, F);
-        if(feof(F)) {
+    FILE *F;
+    F = fopen("Realisateurs.bin", "rb");
+    while (1) {
+        fread(&real, sizeof(struct Realisateur), 1, F);
+        if (feof(F)) {
             break;
         }
         printf("Realisateur n %d : \n\n", i);
-        printf("nom = %s\n",real.nom);
-        printf("Prenom = %s\n",real.prenom);
-        printf("Nationalite = %s\n",real.nationalite);
-        printf("Date de naissance = %s\n\n\n",real.dateNaissance);
+        printf("nom = %s\n", real.nom);
+        printf("Prenom = %s\n", real.prenom);
+        printf("Nationalite = %s\n", real.nationalite);
+        printf("Date de naissance = %s\n\n\n", real.dateNaissance);
         i++;
 
     }
     fclose(F);
     int key;
-    while (key != ENTER){
+    while (key != ENTER) {
         printf("Appuyez sur Entrer pour quitter\n\n");
         key = getchar();
     }
@@ -194,20 +195,20 @@ void listerFilms() {
     int j;
     system("clear");
     printf("Liste de tous les Films : \n\n\n");
-    FILE* F;
-    F = fopen("Films.bin","rb");
-    while(1){
-        fread(&movie,sizeof(struct Film), 1, F);
-        if(feof(F)) {
+    FILE *F;
+    F = fopen("Films.bin", "rb");
+    while (1) {
+        fread(&movie, sizeof(struct Film), 1, F);
+        if (feof(F)) {
             break;
         }
         printf("Film n %d : \n\n", i);
-        printf("Nom = %s\n",movie.nom);
-        printf("Annee de Sortie = %s\n",movie.anneeSortie);
-        printf("Realisateur = {Nom = %s , Prenom = %s}\n",movie.real.nom, movie.real.prenom);
+        printf("Nom = %s\n", movie.nom);
+        printf("Annee de Sortie = %s\n", movie.anneeSortie);
+        printf("Realisateur = {Nom = %s , Prenom = %s}\n", movie.real.nom, movie.real.prenom);
 
-        for (j = 0; j < sizeof(movie.acteurs); j++) {
-            if(*movie.acteurs[j].nom == '\0'){
+        for (j = 0; j < 2; j++) {
+            if (movie.acteurs[j].nom[0] == 0) {
                 break;
             }
             printf("Acteurs = {Nom = %s , Prenom = %s}\n", movie.acteurs[j].nom, movie.acteurs[j].prenom);
@@ -218,11 +219,10 @@ void listerFilms() {
     }
     fclose(F);
     int key;
-    while (key != ENTER){
+    while (key != ENTER) {
         printf("Appuyez sur Entrer pour quitter\n\n");
         key = getchar();
     }
-
 }
 
 void listerActeur() {
@@ -230,33 +230,33 @@ void listerActeur() {
     int i = 1;
     system("clear");
     printf("Liste de tous les Acteurs : \n\n\n");
-    FILE* F;
-    F = fopen("Acteurs.bin","rb");
-    while(1){
-        fread(&act,sizeof(struct Acteur), 1, F);
-        if(feof(F)) {
+    FILE *F;
+    F = fopen("Acteurs.bin", "rb");
+    while (1) {
+        fread(&act, sizeof(struct Acteur), 1, F);
+        if (feof(F)) {
             break;
         }
         printf("Acteur n %d : \n\n", i);
-        printf("nom = %s\n",act.nom);
-        printf("Prenom = %s\n",act.prenom);
-        printf("Nationalite = %s\n",act.nationalite);
-        printf("Date de naissance = %s\n\n\n",act.dateNaissance);
+        printf("nom = %s\n", act.nom);
+        printf("Prenom = %s\n", act.prenom);
+        printf("Nationalite = %s\n", act.nationalite);
+        printf("Date de naissance = %s\n\n\n", act.dateNaissance);
         i++;
 
     }
     fclose(F);
     int key;
-    while (key != ENTER){
+    while (key != ENTER) {
         printf("Appuyez sur Entrer pour quitter\n\n");
         key = getchar();
     }
 
 }
 
-void creerActeur(){
+void creerActeur() {
 
-    FILE* F;
+    FILE *F;
     Acteur act;
     char nom[50];
     char prenom[50];
@@ -286,15 +286,15 @@ void creerActeur(){
 
 }
 
-Realisateur chercheReal(int choix){
+Realisateur chercheReal(int choix) {
     Realisateur real;
     int i = 1;
-    FILE* F;
-    F = fopen("Realisateurs.bin","rb");
-    while(1){
-        fread(&real,sizeof(struct Realisateur), 1, F);
+    FILE *F;
+    F = fopen("Realisateurs.bin", "rb");
+    while (1) {
+        fread(&real, sizeof(struct Realisateur), 1, F);
 
-        if(feof(F) || i == choix) {
+        if (feof(F) || i == choix) {
             break;
         }
 
@@ -304,35 +304,35 @@ Realisateur chercheReal(int choix){
     return real;
 }
 
-Acteur* chercheActeur(int nbActeur){
+Acteur *chercheActeur(int nbActeur) {
 
     Acteur currentAct;
-    Acteur* actFile;
-    Acteur* act;
-    actFile = (struct Acteur*)malloc(sizeof(struct Acteur));
-    act = (struct Acteur*)malloc(sizeof(struct Acteur));
+    Acteur *actFile;
+    Acteur *act;
+    actFile = malloc(sizeof(Acteur));
+    act = malloc(sizeof(Acteur));
     int i = 0;
     int j;
     int choix;
-    FILE* F;
-    F = fopen("Acteurs.bin","rb");
+    FILE *F;
+    F = fopen("Acteurs.bin", "rb");
 
-    while(1){
-        fread(&currentAct,sizeof(struct Acteur), 1, F);
+    while (1) {
+        fread(&currentAct, sizeof(struct Acteur), 1, F);
         i++;
         actFile = realloc(actFile, (i + 1) * sizeof(struct Acteur));
 
         actFile[i] = currentAct;
 
-        if(feof(F)) {
+        if (feof(F)) {
             break;
         }
     }
     for (j = 0; j < nbActeur; j++) {
-        printf("Tapez le numero de vos Acteurs ( acteur n %d) :\n", j+1);
-        scanf("%d",&choix);
+        printf("Tapez le numero de vos Acteurs ( acteur n %d) :\n", j + 1);
+        scanf("%d", &choix);
 
-        act = realloc(act, (j + 1)  * sizeof(struct Acteur));
+        act = realloc(act, (j + 1) * sizeof(struct Acteur));
         act[j] = actFile[choix];
 
     }
@@ -341,9 +341,9 @@ Acteur* chercheActeur(int nbActeur){
     return act;
 }
 
-void creerFilm(){
+void creerFilm() {
 
-    FILE* F;
+    FILE *F;
     Film movie;
     char nom[50];
     char anneeSortie[50];
@@ -370,15 +370,18 @@ void creerFilm(){
 
     viderBuffer();
 
-    printf("Tapez combien d'Acteurs a votre film: \n");
+    printf("Tapez combien d'Acteurs jouent dans votre film: \n");
     scanf(" %d", &nb);
 
     listerActeur();
 
-    movie.acteurs = chercheActeur(nb);
+
+    Acteur *actor = chercheActeur(nb);
+    memcpy(movie.acteurs, actor, sizeof(movie.acteurs));
+
 
     F = fopen("Films.bin", "ab");
-    fwrite(&movie, sizeof(struct Film), 1, F);
+    fwrite(&movie, sizeof(movie), 1, F);
     fclose(F);
 
     viderBuffer();
@@ -386,9 +389,9 @@ void creerFilm(){
     afficherSousMenu(0);
 }
 
-void creerRealisateur(){
+void creerRealisateur() {
 
-    FILE* F;
+    FILE *F;
     Realisateur real;
     char nom[50];
     char prenom[50];
@@ -421,7 +424,7 @@ void creerRealisateur(){
 }
 
 int choixSousMenu(int i) {
-    switch(i){
+    switch (i) {
         case 0:
             creerRealisateur();
             afficherSousMenu(0);
@@ -450,20 +453,46 @@ char saisieTexte(void) {
     return saisie;
 }
 
-void rechercheFilm(char nom) {
-    FILE *fptr;
-    //fptr = fopen('data/films.bin', 'rb');
+void rechercheFilm() {
+    Film movie[50];
+    int k = 0;
+    system("clear");
+    FILE *F;
+    F = fopen("Films.bin", "rb");
+    while (1) {
+        fread(&movie[k], sizeof(struct Film), 1, F);
+        if (feof(F)) {
+            break;
+        }
+        k += 1;
+    }
+    fclose(F);
+    int key;
+    char choix[50];
+    printf("Tapez une partie du nom du film que vous recherchez : \n");
+    scanf(" %s", &choix);
+    viderBuffer();
 
+    for (int i = 0; i < 50; i++) {
+        if (strchr(movie[i].nom, *choix) != NULL) {
+            afficherFilm(movie[i]);
+        }
+    }
+
+    while (key != ENTER) {
+        printf("Appuyez sur Entrer pour quitter\n\n");
+        key = getchar();
+    }
 }
 
-void saveStruct(void *structure, char fileName){
+void saveStruct(void *structure, char fileName) {
     FILE *fptr;
     fptr = fopen(fileName, "ab");
     fwrite(&structure, sizeof(structure), 1, fptr);
     fclose(fptr);
 }
 
-void retrieveDataFromFile(char fileName, int type){
+void retrieveDataFromFile(char fileName, int type) {
     FILE *fptr;
     fptr = fopen(&fileName, "r");
 
@@ -471,7 +500,7 @@ void retrieveDataFromFile(char fileName, int type){
     Realisateur *real;
     Film *movie;
 
-    switch(type){
+    switch (type) {
         case 0:
             fread(act, sizeof(Acteur), 1, fptr);
         case 1:
@@ -482,30 +511,37 @@ void retrieveDataFromFile(char fileName, int type){
     //printf ("Nom = %s name = %s %s\n", lefilm.nom, lefilm.acteurs[0].nom, lefilm.real.nom)
 }
 
-void rechercherFilm(char ouestcharlie)
-{
+void rechercherFilm(char ouestcharlie) {
     Film movies[30];
-    for (int i = 0; i < 30; i++)
-    {
+    for (int i = 0; i < 30; i++) {
         char str = movies[i].nom;
         char *ptr = strstr(str, ouestcharlie);
-        if (ptr != NULL)
-        {
+        if (ptr != NULL) {
             afficherFilm(movies[i]);
         }
     }
 }
 
-void viderBuffer()
-{
+void viderBuffer() {
     int c = 0;
-    while (c != ENTER && c != EOF)
-    {
+    while (c != ENTER && c != EOF) {
         c = getchar();
     }
 }
 
-void afficherFilm(Film the_movie)
-{
-
+void afficherFilm(Film the_movie) {
+    Film movie = the_movie;
+    int j = 0;
+    system("clear");
+    printf("Film: \n\n");
+    printf("Nom = %s\n", movie.nom);
+    printf("Annee de Sortie = %s\n", movie.anneeSortie);
+    printf("Realisateur = {Nom = %s , Prenom = %s}\n", movie.real.nom, movie.real.prenom);
+    for (j = 0; j < 2; j++) {
+        if (movie.acteurs[j].nom[0] == 0) {
+            break;
+        }
+        printf("Acteurs = {Nom = %s , Prenom = %s}\n", movie.acteurs[j].nom, movie.acteurs[j].prenom);
+    }
+    printf("\n\n");
 }
